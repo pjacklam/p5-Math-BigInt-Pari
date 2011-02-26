@@ -1,5 +1,14 @@
 Revision history for Math::BigInt::Pari
 
+2011-02-10 v1.15 pjacklam (6151 tests)
+ * Include latest version of test scripts from Math-BigInt (closes RT #65580)
+   (Peter John Acklam).
+ * Add 00sig.t for testing SIGNATURE, and 01load.t for basic module loading and
+   giving diagnostics useful for bug tracking (Peter John Acklam).
+ * Rename pod.t to 02pod.t and pod_cov.t to 03podcov.t and use more generic
+   code (Peter John Acklam).
+ * Clean up whitespace (Peter John Acklam).
+
 2010-09-10 v1.14 rafl 5716 tests
  * Fix tests with Math::BigInt >= 1.90 and depend on it.
 
@@ -106,27 +115,27 @@ Revision history for Math::BigInt::Pari
  - tests are now from v1.50
  - added _fac() for faster factorial() (used from MBI v1.50 onwards)
 
-	#!/usr/bin/perl -w
-	use lib 'lib';
-	use Math::BigInt lib => 'Pari';
-	use Benchmark;
-	my $c = 20000;
-	my $x = Math::BigInt->new(1); my $z = $x->copy()->blsft($c);
-	my $x1 = Math::BigInt->new(1); my $z1 = $x->copy()->blsft($c*10);
+        #!/usr/bin/perl -w
+        use lib 'lib';
+        use Math::BigInt lib => 'Pari';
+        use Benchmark;
+        my $c = 20000;
+        my $x = Math::BigInt->new(1); my $z = $x->copy()->blsft($c);
+        my $x1 = Math::BigInt->new(1); my $z1 = $x->copy()->blsft($c*10);
         timethese ( -3, {
           right_1_10 => sub { $x->brsft(1,10); },
           left_1_10 => sub { $z->blsft(1,10); },
           right_10_10 => sub { $x1->blsft(10,10); },
           left_10_10 => sub { $z1->brsft(10,10); }, } );
 
-	Results (operations per second) on a 1Ghz Athlon:
-	
-			v1.05	v1.06	Factor
-	  -------------------------------------
-	 left_10_10:     1990    6000   3.0
- 	  left_1_10:     2280    5150   2.2
-	right_10_10:     1130    1560   1.4
-	 right_1_10:     2570    6433   2.5
+        Results (operations per second) on a 1Ghz Athlon:
+
+                        v1.05   v1.06   Factor
+          -------------------------------------
+         left_10_10:     1990    6000   3.0
+          left_1_10:     2280    5150   2.2
+        right_10_10:     1130    1560   1.4
+         right_1_10:     2570    6433   2.5
 
 
 2001-11-11 v1.05 Tels
@@ -137,27 +146,27 @@ Revision history for Math::BigInt::Pari
  - added _mod() for faster % operator (about two times faster now)
  - added _lsft() and _rsft() for faster shifting
 
-	#!/usr/bin/perl -w
-	use lib 'lib';
-	use Math::BigInt lib => 'Pari';
-	use Benchmark;
-	my $c = 20000;
-	my $x = Math::BigInt->new(1); my $z = $x->copy()->blsft($c);
-	my $x1 = Math::BigInt->new(1); my $z1 = $x->copy()->blsft($c*10);
-	timethese ( $c, {
-	  right_1 => sub { $x->brsft(1,2); },
-	  left_1 => sub { $z->blsft(1,2); },
-	  right_10 => sub { $x1->blsft(10,2); },
-	  left_10 => sub { $z1->brsft(10,2); }, } );
+        #!/usr/bin/perl -w
+        use lib 'lib';
+        use Math::BigInt lib => 'Pari';
+        use Benchmark;
+        my $c = 20000;
+        my $x = Math::BigInt->new(1); my $z = $x->copy()->blsft($c);
+        my $x1 = Math::BigInt->new(1); my $z1 = $x->copy()->blsft($c*10);
+        timethese ( $c, {
+          right_1 => sub { $x->brsft(1,2); },
+          left_1 => sub { $z->blsft(1,2); },
+          right_10 => sub { $x1->blsft(10,2); },
+          left_10 => sub { $z1->brsft(10,2); }, } );
 
-	Results (operations per second) on a 1Ghz Athlon:
-	
-			v1.03	v1.04	Factor
-	  -------------------------------------
-	    left_1:      2577    6450	2.5
-	   left_10:       881    3086	3.5
-	   right_1:      2928    6990   2.4
-	  right_10:      2020    5465   2.7
+        Results (operations per second) on a 1Ghz Athlon:
+
+                        v1.03   v1.04   Factor
+          -------------------------------------
+            left_1:      2577    6450   2.5
+           left_10:       881    3086   3.5
+           right_1:      2928    6990   2.4
+          right_10:      2020    5465   2.7
 
 1.03  2001.09.02 btrott
     - Incorporated Tels's changes: no longer need to EXPORT_OK functions;

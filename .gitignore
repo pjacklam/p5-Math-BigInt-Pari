@@ -14,3 +14,4 @@ Math-BigInt-*
 *.bs
 Pari.*
 !Pari.xs
+SIGNATURE

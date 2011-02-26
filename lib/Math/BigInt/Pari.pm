@@ -1,20 +1,20 @@
 package Math::BigInt::Pari;
 
-$VERSION = '1.14';
+$VERSION = '1.15';
 
 use strict;
 
-use Math::Pari 
+use Math::Pari
  qw(PARI pari2pv gdivent bittest gcmp gcmp0 gcmp1 gcd ifact gpui gmul);
 
 # MBI will call this, so catch it and throw it away
 sub import { }
 sub api_version() { 2; }        # we are compatible with MBI v1.83 and up
 
-my $zero = PARI(0);	# for _copy
-my $one = PARI(1);	# for _inc and _dec
-my $two = PARI(2);	# for _is_two
-my $ten = PARI(10);	# for _digit
+my $zero = PARI(0);     # for _copy
+my $one = PARI(1);      # for _inc and _dec
+my $two = PARI(2);      # for _is_two
+my $ten = PARI(10);     # for _digit
 
 BEGIN
   {
@@ -25,7 +25,7 @@ BEGIN
 sub _new {
   # the . '' is because new($2) will give a magical scalar to us, and PARI
   # does not like this at all :/
-  # use Devel::Peek; print Dump($_[1]); 
+  # use Devel::Peek; print Dump($_[1]);
   PARI($_[1] . '')
   }
 
@@ -36,11 +36,11 @@ sub _from_hex {
 sub _from_bin
   {
   my $b = $_[1];
-  $b =~ s/^0b//;					# remove leading 0b
-  my $l = length($b);					# in bits
-  $b = '0' x (8-($l % 8)) . $b if ($l % 8) != 0;	# padd left side w/ 0
-  my $h = unpack('H*', pack ('B*', $b));		# repack as hex
-  Math::Pari::_hex_cvt('0x' . $h);			# Pari can handle it now
+  $b =~ s/^0b//;                                        # remove leading 0b
+  my $l = length($b);                                   # in bits
+  $b = '0' x (8-($l % 8)) . $b if ($l % 8) != 0;        # padd left side w/ 0
+  my $h = unpack('H*', pack ('B*', $b));                # repack as hex
+  Math::Pari::_hex_cvt('0x' . $h);                      # Pari can handle it now
   }
 
 sub _from_oct
@@ -84,7 +84,7 @@ sub _mp2os {
                 $r >= 65536 ? substr($buf, 0, 3) :
                 $r >= 256   ? substr($buf, 0, 2) :
                               substr($buf, 0, 1);
-      } 
+      }
     $res .= $buf;
     }
   scalar reverse $res;
@@ -117,7 +117,7 @@ sub _num { pari2pv($_[1]) }
 
 sub _add { $_[1] += $_[2] }
 
-sub _sub 
+sub _sub
   {
   if ($_[3])
     {
@@ -141,7 +141,7 @@ sub _div
 
 sub _mod { $_[1] %= $_[2]; }
 
-#sub _inc { ++$_[1]; }	# ++ and -- flotify (bug in Pari?)
+#sub _inc { ++$_[1]; }  # ++ and -- flotify (bug in Pari?)
 #sub _dec { --$_[1]; }
 sub _inc { $_[1] += $one; }
 sub _dec { $_[1] -= $one; }
@@ -156,14 +156,14 @@ sub _pow { gpui($_[1], $_[2]) }
 
 sub _gcd { gcd($_[1], $_[2]) }
 
-sub _len { length(pari2pv($_[1])) }	# costly!
+sub _len { length(pari2pv($_[1])) }     # costly!
 
 # XXX TODO: calc len in base 2 then appr. in base 10
 sub _alen { length(pari2pv($_[1])) }
 
-sub _zeros 
+sub _zeros
   {
-  return 0 if gcmp0($_[1]);		# 0 has no trailing zeros
+  return 0 if gcmp0($_[1]);             # 0 has no trailing zeros
 
   # We seem NOT be able to use a regexp like:
   # my $u = _num(@_); $u =~ /(0+)\z/; return length($1);
@@ -176,7 +176,7 @@ sub _zeros
     substr($s,$i,1) eq '0' ? $zeros ++ : last;
     }
   $zeros;
-  }  
+  }
 
 sub _digit
   {
@@ -202,8 +202,8 @@ sub _is_even { bittest($_[1],0) ? 0 : 1 }
 
 sub _is_odd { bittest($_[1],0) ? 1 : 0 }
 
-sub _acmp { 
- my $i = gcmp($_[1],$_[2]) || 0; 
+sub _acmp {
+ my $i = gcmp($_[1],$_[2]) || 0;
  # work around bug in Pari (on 64bit systems?)
  $i = -1 if $i == 4294967295;
  $i;
@@ -279,7 +279,7 @@ sub _rsft
 sub _lsft
   {
   # (X,Y,N) = @_; means X >> Y in base N
-  
+
   if ($_[3] != 2)
     {
     return $_[1] *= PARI($_[3]) ** $_[2];
@@ -337,7 +337,7 @@ sub _log_int
   # BASE 0 or 1 => NaN
   return if _is_zero($c,$base) || _is_one($c,$base);
 
-  my $cmp = _acmp($c,$x,$base); 	# X == BASE => 1
+  my $cmp = _acmp($c,$x,$base);         # X == BASE => 1
   if ($cmp == 0)
     {
     # return one
@@ -418,9 +418,9 @@ Provides support for big integer in BigInt et al. calculations via means of
 Math::Pari, an XS layer on top of the very fast PARI library.
 
 =head1 LICENSE
- 
+
 This program is free software; you may redistribute it and/or modify it
-under the same terms as Perl itself. 
+under the same terms as Perl itself.
 
 =head1 AUTHOR
 
