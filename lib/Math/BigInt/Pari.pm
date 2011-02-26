@@ -1,6 +1,6 @@
 package Math::BigInt::Pari;
 
-$VERSION = '1.15';
+$VERSION = '1.16';
 
 use strict;
 

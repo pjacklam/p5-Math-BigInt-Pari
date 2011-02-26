@@ -1,5 +1,9 @@
 Revision history for Math::BigInt::Pari
 
+2011-02-26 v1.16 pjacklam (6153 tests)
+  * Change bigintpm.inc to reflect recent changes in the Math::BigInt
+    distribution (Peter John Acklam).
+
 2011-02-10 v1.15 pjacklam (6151 tests)
  * Include latest version of test scripts from Math-BigInt (closes RT #65580)
    (Peter John Acklam).
