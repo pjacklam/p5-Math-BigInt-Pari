@@ -1,5 +1,9 @@
 Revision history for Math::BigInt::Pari
 
+2014-04-03 v1.18 pjacklam
+ * Updated test files from the Math::BigInt distribution (Peter John Acklam).
+ * Updated POD (Peter John Acklam)
+
 2011-09-04 v1.17 pjacklam
  * Upgrade bundled modules in "inc" to latest version. (Peter John Acklam)
  * Math::BigInt::GMP now requires Math::BigInt v1.997 (Peter John Acklam).

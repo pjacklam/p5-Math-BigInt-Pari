@@ -1,6 +1,11 @@
 package Math::BigInt::Pari;
 
-$VERSION = '1.17';
+use strict;
+use 5.006002;
+
+use vars qw/$VERSION/;
+
+$VERSION = '1.18';
 
 use strict;
 
@@ -400,7 +405,10 @@ sub _log_int
   }
 
 1;
+
 __END__
+
+=pod
 
 =head1 NAME
 
@@ -417,6 +425,65 @@ Math::BigInt::Pari - Use Math::Pari for Math::BigInt routines
 Provides support for big integer in BigInt et al. calculations via means of
 Math::Pari, an XS layer on top of the very fast PARI library.
 
+=head1 BUGS
+
+Please report any bugs or feature requests to
+C<bug-math-bigint-pari at rt.cpan.org>, or through the web interface at
+L<https://rt.cpan.org/Ticket/Create.html?Queue=Math-BigInt-Pari>
+(requires login).
+We will be notified, and then you'll automatically be notified of progress on
+your bug as I make changes.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc Math::BigInt::Pari
+
+You can also look for information at:
+
+=over 4
+
+=item * RT: CPAN's request tracker
+
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=Math-BigInt-Pari>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Math-BigInt-Pari>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/dist/Math-BigInt-Pari>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/Math-BigInt-Pari/>
+
+=item * CPAN Testers Matrix
+
+L<http://matrix.cpantesters.org/?dist=Math-BigInt-Pari>
+
+=item * The Bignum mailing list
+
+=over 4
+
+=item * Post to mailing list
+
+C<bignum at lists.scsys.co.uk>
+
+=item * View mailing list
+
+L<http://lists.scsys.co.uk/pipermail/bignum/>
+
+=item * Subscribe/Unsubscribe
+
+L<http://lists.scsys.co.uk/cgi-bin/mailman/listinfo/bignum>
+
+=back
+
+=back
+
 =head1 LICENSE
 
 This program is free software; you may redistribute it and/or modify it
@@ -431,6 +498,7 @@ L<Math::Pari> was written by Ilya Zakharevich.
 
 =head1 SEE ALSO
 
-L<Math::BigInt>, L<Math::BigInt::Calc>, L<Math::Pari>.
+L<Math::BigInt>, L<Math::BigFloat>, L<Math::Pari>, and the other backends
+L<Math::BigInt::Calc>, L<Math::BigInt::GMP>, and L<Math::BigInt::Pari>.
 
 =cut
