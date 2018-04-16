@@ -1,5 +1,15 @@
 Revision history for Math::BigInt::Pari
 
+2016-11-23 v1.3001 pjacklam
+
+  * Sync test files with Math-BigInt-1.999801. Add t/mbi_rand.t, t/mbimbf.t,
+    and t/mbimbf.inc since these are included in the test suite for the other
+    backend libraries (GMP and Pari).
+
+  * Add _nok() by using Pari's binomial() function.
+
+  * Add _lcm() by using Pari's lcm() function.
+
 2016-11-15 v1.3000 pjacklam
 
   * Sync test files with Math-BigInt-1.999800.

@@ -4,14 +4,16 @@ use 5.006002;
 use strict;
 use warnings;
 
-use Math::BigInt::Lib '1.999800';
+use Math::BigInt::Lib '1.999801';
 
 our @ISA = qw< Math::BigInt::Lib >;
 
-our $VERSION = '1.3000';
+our $VERSION = '1.3001';
 
 use Math::Pari qw(PARI pari2pv gdivent bittest
-                  gcmp gcmp0 gcmp1 gcd ifact gpui gmul);
+                  gcmp gcmp0 gcmp1 gcd ifact gpui gmul
+                  binomial lcm
+                );
 
 # MBI will call this, so catch it and throw it away
 sub import { }
@@ -136,6 +138,8 @@ sub _div {
 
 sub _mod { $_[1] %= $_[2]; }
 
+sub _nok { binomial($_[1], $_[2]) }
+
 #sub _inc { ++$_[1]; }  # ++ and -- flotify (bug in Pari?)
 #sub _dec { --$_[1]; }
 sub _inc { $_[1] += $one; }
@@ -151,6 +155,8 @@ sub _or { $_[1] |= $_[2] }
 sub _pow { gpui($_[1], $_[2]) }
 
 sub _gcd { gcd($_[1], $_[2]) }
+
+sub _lcm { lcm($_[1], $_[2]) }
 
 sub _len { length(pari2pv($_[1])) } # costly!
 
@@ -188,6 +194,7 @@ sub _is_zero { gcmp0($_[1]) }
 sub _is_one { gcmp1($_[1]) }
 
 sub _is_two { gcmp($_[1], $two) ? 0 : 1 }
+
 sub _is_ten { gcmp($_[1], $ten) ? 0 : 1 }
 
 sub _is_even { bittest($_[1], 0) ? 0 : 1 }
