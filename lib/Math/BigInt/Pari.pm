@@ -5,7 +5,7 @@ use 5.006002;
 
 use vars qw/$VERSION/;
 
-$VERSION = '1.20';
+$VERSION = '1.21';
 
 use strict;
 
