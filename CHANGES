@@ -1,5 +1,54 @@
 Revision history for Math::BigInt::Pari
 
+2015-09-11 v1.19 pjacklam
+ bigfltpm.inc
+  * File removed. It was included in the previous release by accident.
+ bigfltpm.t
+  * File removed. It was included in the previous release by accident.
+ bigintpm.inc
+  * File removed. It was included in the previous release by accident.
+ bigintpm.t
+  * File removed. It was included in the previous release by accident.
+ biglog.t
+  * File removed. It was included in the previous release by accident.
+ bigroot.t
+  * File removed. It was included in the previous release by accident.
+ inc/Module/Install.pm
+  * Update bundled Module::Install from v1.08 to v1.16.
+ lib/Math/BigInt/Pari.pm
+  * Updated version number.
+  * Fixed bug in _modpow().
+ Makefile.PL
+  * Updated required version of Math::BigInt to 1.999701.
+ t/01load.t
+  * Improve formatting of module version information.
+ t/03podcov.t
+  * Slight reformatting and better information message.
+ t/bigfltpm.inc
+  * Sync tests with the Math-BigInt distribution.
+ t/bigfltpm.t
+  * Adjust number of tests.
+  * Sync tests with the Math-BigInt distribution.
+  * Make sure we test Math::BigInt::Pari, not Math::BigInt::Calc.
+ t/bigintpm.inc
+  * Sync tests with the Math-BigInt distribution.
+ t/bigintpm.t
+  * Adjust number of tests.
+  * Make sure we test Math::BigInt::Pari, not Math::BigInt::Calc.
+ t/biglog.t
+  * Adjust number of tests.
+  * Sync tests with the Math-BigInt distribution.
+  * Make sure we test Math::BigInt::Pari, not Math::BigInt::Calc.
+ t/bigroot.t
+  * Adjust number of tests.
+  * Make sure we test Math::BigInt::Pari, not Math::BigInt::Calc.
+ t/*.t
+  * Add "use warnings" to test scripts, since Perl 5.6.2 is required anyway,
+    and "use warnings" was introduced in Perl 5.6.1.
+  * Modified test scripts so the difference between the test files in the
+    Math-BigInt distribution and the backend distributions are as few and as
+    small as possible. This makes for easier release management.
+
 2014-04-03 v1.18 pjacklam
  * Updated test files from the Math::BigInt distribution (Peter John Acklam).
  * Updated POD (Peter John Acklam)

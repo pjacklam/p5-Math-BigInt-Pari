@@ -5,7 +5,7 @@ use 5.006002;
 
 use vars qw/$VERSION/;
 
-$VERSION = '1.18';
+$VERSION = '1.19';
 
 use strict;
 
@@ -246,11 +246,19 @@ sub _modpow
     $num = PARI(0);
     return $num;
     }
-  if (gcmp1($num) || gcmp0($num))
+  if (gcmp1($num))
     {
     $num = PARI(1);
     return $num;
     }
+
+  if (gcmp0($num)) {
+      if (gcmp0($exp)) {
+          return PARI(1);
+      } else {
+          return PARI(0);
+      }
+  }
 
   my $acc = _copy($c,$num); my $t = _one();
 
@@ -302,6 +310,10 @@ sub _modinv
   {
   # modular inverse
   my ($c,$x,$y) = @_;
+
+    if (gcmp1($y)) {
+        return PARI(0), '+';
+    }
 
   my $u = PARI(0); my $u1 = PARI(1);
   my $a = _copy($c,$y); my $b = _copy($c,$x);
