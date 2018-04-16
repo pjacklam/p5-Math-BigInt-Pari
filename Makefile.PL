@@ -1,27 +1,24 @@
 #!perl
 
 use strict;
+use warnings;
+use ExtUtils::MakeMaker;
 
-# Load the Module::Install bundled in ./inc/
-use inc::Module::Install;
-
-# The name of your distribution
-name		'Math-BigInt-Pari';
-
-# Get most of the details from the primary module
-all_from	'lib/Math/BigInt/Pari.pm';
-
-requires	'perl'		=> '5.006002';
-requires	'Math::BigInt'	=> '1.999801';
-requires	'Math::Pari'	=> '2.010709';
-
-test_requires	'Test::More'	=> 0.94;
-
-license		'perl';
-
-author		'Peter John Acklam <pjacklam@gmail.com>';
-
-sign;
-
-# Generate the Makefile
-WriteAll;
+WriteMakefile
+  (
+   'NAME'               => 'Math::BigInt::Pari',
+   'VERSION_FROM'       => 'lib/Math/BigInt/Pari.pm',
+   'AUTHOR'             => 'Peter John Acklam <pjacklam@gmail.com>',
+   'MIN_PERL_VERSION'   => 5.006002,
+   'PREREQ_PM'          => {
+                            #'ExtUtils::MakeMaker' => 6.58,
+                            'Test::More'          => 0.82,
+                            'Math::BigInt'        => 1.999801,
+                            'Math::Pari'          => 2.010709,
+                           },
+   'LICENSE'            => 'perl_5',
+   'LIBS'               => [''],        # e.g., '-lm'
+   'DEFINE'             => '',          # e.g., '-DHAVE_SOMETHING'
+   'INC'                => '',          # e.g., '-I/usr/include/other'
+   'SIGN'               => 1,
+  );

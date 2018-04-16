@@ -1,64 +1,89 @@
 Revision history for Math::BigInt::Pari
 
+2016-12-03 v1.3002 pjacklam
+
+ * Use ExtUtils::MakeMaker rather than Module::Install in Makefile.PL
+
+ * Remove author information in LICENSE file.
+
 2016-11-23 v1.3001 pjacklam
 
-  * Sync test files with Math-BigInt-1.999801. Add t/mbi_rand.t, t/mbimbf.t,
-    and t/mbimbf.inc since these are included in the test suite for the other
-    backend libraries (GMP and Pari).
+ * Sync test files with Math-BigInt-1.999801. Add t/mbi_rand.t, t/mbimbf.t,
+   and t/mbimbf.inc since these are included in the test suite for the other
+   backend libraries (GMP and Pari).
 
-  * Add _nok() by using Pari's binomial() function.
+ * Add _nok() by using Pari's binomial() function.
 
-  * Add _lcm() by using Pari's lcm() function.
+ * Add _lcm() by using Pari's lcm() function.
 
 2016-11-15 v1.3000 pjacklam
 
-  * Sync test files with Math-BigInt-1.999800.
+ * Sync test files with Math-BigInt-1.999800.
 
-  * Math::BigInt::Pari is now a subclass of Math::BigInt::Lib, so remove pure
-    Perl methods from Math::BigInt::Pari that are implemented in the superclass
-    Math::BigInt::Lib. The methods removed are _modinv() and _log_int(). The
-    version of _log_int() implemented in Math::BigInt::GMP was buggy anyway.
+ * Math::BigInt::Pari is now a subclass of Math::BigInt::Lib, so remove pure
+   Perl methods from Math::BigInt::Pari that are implemented in the superclass
+   Math::BigInt::Lib. The methods removed are _modinv() and _log_int(). The
+   version of _log_int() implemented in Math::BigInt::GMP was buggy anyway.
 
-  * Add methods _str() and _set(), and correct _num() method.
+ * Add methods _str() and _set(), and correct _num() method.
 
 2016-04-25 v1.27 pjacklam
-  * Sync test files with Math-BigInt-1.999719.
+
+ * Sync test files with Math-BigInt-1.999719.
 
 2016-04-22 v1.26 pjacklam
-  * Sync test files with Math-BigInt-1.999718.
+
+ * Sync test files with Math-BigInt-1.999718.
 
 2016-01-03 v1.25 pjacklam
-  * Sync test files with Math-BigInt-1.999714.
+
+ * Sync test files with Math-BigInt-1.999714.
 
 2015-12-31 v1.24 pjacklam
-  * Sync test files with Math-BigInt-1.999713.
+
+ * Sync test files with Math-BigInt-1.999713.
 
 2015-11-22 v1.23 pjacklam
-  * Sync test files with Math-BigInt-1.999709.
-  * In v1.22 the required version of Math-BigInt was set to 1.999703, but it
-    should have been 1.999706. The required version is now 1.999709.
-  * Correct error in CHANGES file.
+
+ * Sync test files with Math-BigInt-1.999709.
+
+ * In v1.22 the required version of Math-BigInt was set to 1.999703, but it
+   should have been 1.999706. The required version is now 1.999709.
+
+ * Correct error in CHANGES file.
 
 2015-11-09 v1.22 pjacklam
-  * Sync test files with Math-BigInt-1.999709.
-  * Update the README file.
-  * Remove the LICENSE file as this information is already covered in the file
-    README.
-  * Replace 'use vars ...' with 'our ...'. We require a Perl newer than 5.6.0
-    anyway.
-  * Move 'Test::More' from 'build_requires' to 'test_requires' in Makefile.PL.
-  * Enable 'use warnings'. We require a Perl newer than 5.6.0 anyway.
-  * Add 'assertlib.*\.exe' to MANIFEST.SKIP, since make generates temporary
-    files like 'assertlibzxjE4WfG.exe' on Cygwin.
+
+ * Sync test files with Math-BigInt-1.999709.
+
+ * Update the README file.
+
+ * Remove the LICENSE file as this information is already covered in the file
+   README.
+
+ * Replace 'use vars ...' with 'our ...'. We require a Perl newer than 5.6.0
+   anyway.
+
+ * Move 'Test::More' from 'build_requires' to 'test_requires' in Makefile.PL.
+
+ * Enable 'use warnings'. We require a Perl newer than 5.6.0 anyway.
+
+ * Add 'assertlib.*\.exe' to MANIFEST.SKIP, since make generates temporary
+   files like 'assertlibzxjE4WfG.exe' on Cygwin.
 
 2015-09-21 v1.21 pjacklam
-  * Sync test files with Math-BigInt-1.999703.
-  * Required version of Math-BigInt is now 1.999703.
-  * Update author information.
+
+ * Sync test files with Math-BigInt-1.999703.
+
+ * Required version of Math-BigInt is now 1.999703.
+
+ * Update author information.
 
 2015-09-17 v1.20 pjacklam
-  * Sync test files with Math-BigInt-1.999702.
-  * Required version of Math-BigInt is now 1.999702.
+
+ * Sync test files with Math-BigInt-1.999702.
+
+ * Required version of Math-BigInt is now 1.999702.
 
 2015-09-11 v1.19 pjacklam
  bigfltpm.inc
