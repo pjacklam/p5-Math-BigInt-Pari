@@ -1,5 +1,8 @@
 Revision history for Math::BigInt::Pari
 
+2015-12-31 v1.24 pjacklam
+  * Sync test files with Math-BigInt-1.999713.
+
 2015-11-22 v1.23 pjacklam
   * Sync test files with Math-BigInt-1.999709.
   * In v1.22 the required version of Math-BigInt was set to 1.999703, but it
