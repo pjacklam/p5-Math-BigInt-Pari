@@ -1,5 +1,7 @@
 2018-xx-xx v1.3004 pjacklam
 
+ * Convert t/02pod.t -> t/release-pod.t.
+
  * Increment version number.
 
 2017-01-11 v1.3003 pjacklam
