@@ -1,13 +1,10 @@
 package Math::BigInt::Pari;
 
-use strict;
 use 5.006002;
-
-use vars qw/$VERSION/;
-
-$VERSION = '1.21';
-
 use strict;
+use warnings;
+
+our $VERSION = '1.22';
 
 use Math::Pari
  qw(PARI pari2pv gdivent bittest gcmp gcmp0 gcmp1 gcd ifact gpui gmul);

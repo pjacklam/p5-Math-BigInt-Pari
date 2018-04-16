@@ -1,5 +1,21 @@
 Revision history for Math::BigInt::Pari
 
+
+  * Sync test files with Math-BigInt-1.999709.
+
+2015-10-30 v1.22 pjacklam
+  * Sync test files with Math-BigInt-1.999707.
+  * Update the README file.
+  * Remove the LICENSE file as this information is already covered in the file
+    README.
+  * Replace 'use vars ...' with 'our ...'. We require a Perl newer than 5.6.0
+    anyway.
+  * Required version of Math-BigInt is now 1.999706.
+  * Move 'Test::More' from 'build_requires' to 'test_requires' in Makefile.PL.
+  * Enable 'use warnings'. We require a Perl newer than 5.6.0 anyway.
+  * Add 'assertlib.*\.exe' to MANIFEST.SKIP, since make generates temporary
+    files like 'assertlibzxjE4WfG.exe' on Cygwin.
+
 2015-09-21 v1.21 pjacklam
   * Sync test files with Math-BigInt-1.999703.
   * Required version of Math-BigInt is now 1.999703.
