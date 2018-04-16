@@ -4,11 +4,11 @@ use 5.006002;
 use strict;
 use warnings;
 
-use Math::BigInt::Lib '1.999801';
+use Math::BigInt::Lib 1.999801;
 
 our @ISA = qw< Math::BigInt::Lib >;
 
-our $VERSION = '1.3002';
+our $VERSION = '1.3003';
 
 use Math::Pari qw(PARI pari2pv gdivent bittest
                   gcmp gcmp0 gcmp1 gcd ifact gpui gmul
@@ -32,27 +32,19 @@ sub _new {
 }
 
 sub _from_hex {
-    Math::Pari::_hex_cvt($_[1]);
-}
-
-sub _from_bin {
-    my $b = $_[1];
-    $b =~ s/^0b//;                                  # remove leading 0b
-    my $l = length($b);                             # in bits
-    $b = '0' x (8-($l % 8)) . $b if ($l % 8) != 0;  # padd left side w/ 0
-    my $h = unpack('H*', pack ('B*', $b));          # repack as hex
-    Math::Pari::_hex_cvt('0x' . $h);                # Pari can handle it now
+    my $hex = $_[1];
+    $hex = '0x' . $hex unless substr($hex, 0, 2) eq '0x';
+    Math::Pari::_hex_cvt($hex);
 }
 
 sub _from_oct {
     Math::Pari::_hex_cvt('0' . $_[1]);
 }
 
-sub _as_hex {
-    my $v = unpack('H*', _mp2os($_[1]));
-    return "0x0" if $v eq '';
-    $v =~ s/^0*/0x/;
-    $v;
+sub _from_bin {
+    my $bin = $_[1];
+    $bin = '0b' . $bin unless substr($bin, 0, 2) eq '0b';
+    Math::Pari::_hex_cvt($bin);
 }
 
 sub _as_bin {
@@ -67,6 +59,39 @@ sub _as_oct {
     return "00" if $v eq '';
     $v =~ s/^0*/0/;
     $v;
+}
+
+sub _as_hex {
+    my $v = unpack('H*', _mp2os($_[1]));
+    return "0x0" if $v eq '';
+    $v =~ s/^0*/0x/;
+    $v;
+}
+
+sub _to_bin {
+    my $v = unpack('B*', _mp2os($_[1]));
+    $v =~ s/^0+//;
+    return "0" if $v eq '';
+    $v;
+}
+
+sub _to_oct {
+    my $v = _mp2oct($_[1]);
+    $v =~ s/^0+//;
+    return "0" if $v eq '';
+    $v;
+}
+
+sub _to_hex {
+    my $v = unpack('H*', _mp2os($_[1]));
+    $v =~ s/^0+//;
+    return "0" if $v eq '';
+    $v;
+}
+
+sub _to_bytes {
+    my $bytes = _mp2os($_[1]);
+    return $bytes eq '' ? "\x00" : $bytes;
 }
 
 sub _mp2os {
@@ -138,13 +163,31 @@ sub _div {
 
 sub _mod { $_[1] %= $_[2]; }
 
-sub _nok { binomial($_[1], $_[2]) }
+sub _nok {
+    my ($class, $n, $k) = @_;
 
-#sub _inc { ++$_[1]; }  # ++ and -- flotify (bug in Pari?)
-#sub _dec { --$_[1]; }
-sub _inc { $_[1] += $one; }
+    # Math::Pari doesn't seem to be able to handle the case when n is large and
+    # k is almost as big as n. For instance, the following returns zero (at
+    # least for certain versions and configurations):
+    #
+    # $n = PARI("10000000000000000000");
+    # $k = PARI("9999999999999999999");
+    # print Math::Pari::binomial($n, $k);'
 
-sub _dec { $_[1] -= $one; }
+    # If k > n/2, or, equivalently, 2*k > n, compute nok(n, k) as nok(n, n-k).
+
+    {
+        my $twok = $class -> _mul($class -> _two(), $class -> _copy($k));
+        if ($class -> _acmp($twok, $n) > 0) {
+            $k = $class -> _sub($class -> _copy($n), $k);
+        }
+    }
+
+    binomial($n, $k);
+}
+
+sub _inc { ++$_[1]; }
+sub _dec { --$_[1]; }
 
 sub _and { $_[1] &= $_[2] }
 
@@ -164,9 +207,10 @@ sub _len { length(pari2pv($_[1])) } # costly!
 sub _alen { length(pari2pv($_[1])) }
 
 sub _zeros {
-    return 0 if gcmp0($_[1]);   # 0 has no trailing zeros
+    my ($class, $x) = @_;
+    return 0 if gcmp0($x);      # 0 has no trailing zeros
 
-    my $u = _str(@_);
+    my $u = $class -> _str($x);
     $u =~ /(0*)\z/;
     return length($1);
 
@@ -254,19 +298,18 @@ sub _modpow {
         }
     }
 
-    my $acc = _copy($c, $num);
-    my $t = _one();
+    my $acc = $c -> _copy($num);
+    my $t = $c -> _one();
 
-    my $expbin = _as_bin($c, $exp);
-    $expbin =~ s/^0b//;
+    my $expbin = $c -> _to_bin($exp);
     my $len = length($expbin);
     while (--$len >= 0) {
-        if (substr($expbin, $len, 1) eq '1') {# is_odd
-            _mul($c, $t, $acc);
-            $t = _mod($c, $t, $mod);
+        if (substr($expbin, $len, 1) eq '1') {  # is_odd
+            $c -> _mul($t, $acc);
+            $t = $c -> _mod($t, $mod);
         }
-        _mul($c, $acc, $acc);
-        $acc = _mod($c, $acc, $mod);
+        $c -> _mul($acc, $acc);
+        $acc = $c -> _mod($acc, $mod);
     }
     $num = $t;
     $num;

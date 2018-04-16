@@ -1,4 +1,30 @@
-Revision history for Math::BigInt::Pari
+2017-01-11 v1.3003 pjacklam
+
+ * Fix syntax for required version of Math::BigInt::Lib.
+
+ * Better checking of POD coverage.
+
+ * Sync test files with Math-BigInt-1.999808.
+
+ * _from_hex() now accepts input without a "0x" prefix.
+
+ * _from_bin() is more now efficient as it utilises the fact that
+   Math::Pari::_hex_cvt() assumes the input is binary if the strings is
+   prefixed by "0b".
+
+ * Implement _to_hex(), _to_oct(), and _to_bin() for conversion to hexadecimal,
+   octal, and binary without prefix.
+
+ * Fix _nok() to work around a bug in Math::Pari::binomial(). It doesn't
+   correctly handle cases where both n and k are very large.
+
+ * Correct a few cases where non-OO syntax was used, e.g., "$x = _one();"
+   should be "$x = $class -> _one();".
+
+ * _inc() and _dec() now uses post-increment and post-decrement, respectively,
+   rather than adding or subtracting one.
+
+ * In test file t/01load.t, display the PARI library version number.
 
 2016-12-03 v1.3002 pjacklam
 

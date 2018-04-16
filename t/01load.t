@@ -22,4 +22,12 @@ diag(sprintf("%12s %s\n", '-------', '------'));
 for my $mod (@mods) {
     diag(sprintf("%12s %s\n", $mod -> VERSION, $mod));
 }
+
+my $pari_ver_exp    = Math::Pari::pari_version_exp();
+my $pari_major      = int($pari_ver_exp / 1e6) % 1e3;
+my $pari_minor      = int($pari_ver_exp / 1e3) % 1e3;
+my $pari_patchlevel =     $pari_ver_exp        % 1e3;
+my $pari_ver        = "$pari_major.$pari_minor.$pari_patchlevel";
+
+diag(sprintf("%12s %s\n", $pari_ver, 'PARI'));
 diag("");

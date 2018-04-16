@@ -13,7 +13,7 @@ WriteMakefile
    'PREREQ_PM'          => {
                             #'ExtUtils::MakeMaker' => 6.58,
                             'Test::More'          => 0.82,
-                            'Math::BigInt'        => 1.999801,
+                            'Math::BigInt'        => 1.999808,
                             'Math::Pari'          => 2.010709,
                            },
    'LICENSE'            => 'perl_5',
