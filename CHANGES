@@ -1,5 +1,7 @@
 1.3004 Not Released pjacklam
 
+ * Sync test files with Math-BigInt.
+
  * Add test file t/release-test-version.t.
 
  * Use a MANIFEST.SKIP file based on the default file from ExtUtils::Manifest.
