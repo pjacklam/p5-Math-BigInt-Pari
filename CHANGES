@@ -1,5 +1,7 @@
 1.3004 Not Released pjacklam
 
+ * Add test file t/release-test-version.t.
+
  * Use a MANIFEST.SKIP file based on the default file from ExtUtils::Manifest.
 
  * Add test file t/release-portability.t.
