@@ -1,5 +1,7 @@
 2018-xx-xx v1.3004 pjacklam
 
+ * Convert t/03podcov.t -> t/release-pod-coverage.t.
+
  * Update .gitignore.
 
  * Convert t/02pod.t -> t/release-pod.t.
