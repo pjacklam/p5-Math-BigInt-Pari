@@ -1,5 +1,16 @@
 Revision history for Math::BigInt::Pari
 
+2016-11-15 v1.3000 pjacklam
+
+  * Sync test files with Math-BigInt-1.999800.
+
+  * Math::BigInt::Pari is now a subclass of Math::BigInt::Lib, so remove pure
+    Perl methods from Math::BigInt::Pari that are implemented in the superclass
+    Math::BigInt::Lib. The methods removed are _modinv() and _log_int(). The
+    version of _log_int() implemented in Math::BigInt::GMP was buggy anyway.
+
+  * Add methods _str() and _set(), and correct _num() method.
+
 2016-04-25 v1.27 pjacklam
   * Sync test files with Math-BigInt-1.999719.
 

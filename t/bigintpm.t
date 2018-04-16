@@ -6,7 +6,7 @@ use warnings;
 use Test::More tests => 3913            # tests in require'd file
                          + 6;           # tests in this file
 
-use Math::BigInt lib => 'Pari';
+use Math::BigInt only => 'Pari';
 
 our ($CLASS, $CALC);
 $CLASS = "Math::BigInt";
