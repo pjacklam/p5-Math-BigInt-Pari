@@ -1,4 +1,8 @@
-1.3005
+1.3005 2018-10-09
+
+ * Update MANIFEST.SKIP.
+
+ * Sync test files with Math-BigInt.
 
  * Better Makefile.PL.
 
